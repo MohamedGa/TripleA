@@ -1,0 +1,12 @@
+
+/* Class = "UILabel"; text = "force"; ObjectID = "7Hb-QS-EXh"; */
+"7Hb-QS-EXh.text" = "قوه";
+
+/* Class = "UIButton"; normalTitle = "change lang"; ObjectID = "d3w-ja-hSu"; */
+"d3w-ja-hSu.normalTitle" = "تغيير لغه";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "lMs-dy-PFM"; */
+"lMs-dy-PFM.text" = "عربي";
+
+/* Class = "UILabel"; text = "message view controller"; ObjectID = "m2Y-E2-PET"; */
+"m2Y-E2-PET.text" = "احمد";
