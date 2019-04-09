@@ -47,6 +47,8 @@ class companies: NSObject {
     var ms_id: Int = 0
     var ms_name: String = ""
     var ms_description: String = ""
+    var c_address: String = ""
+    var c_coverimage: String = ""
  
     
 }
@@ -75,6 +77,8 @@ class groups: NSObject {
     var ms_id: Int = 0
     var ms_name: String = ""
     var ms_description: String = ""
+    var c_address: String = ""
+    var c_coverimage: String = ""
     
     
 }
@@ -103,7 +107,9 @@ class persons: NSObject {
     var ms_id: Int = 0
     var ms_name: String = ""
     var ms_description: String = ""
-    
+    var c_address: String = ""
+    var c_coverimage: String = ""
+   
     
 }
 class companyOffers: NSObject {
@@ -167,6 +173,22 @@ class companyDetails: NSObject {
     var updated_at: String = ""
    var c_longitude: Double = 0
     var c_lattitude: Double = 0
+    var c_address: String = ""
    
     
+}
+
+class cities: NSObject {
+    
+    var  city_id: Int = 0
+    var city_name: String = ""
+    
+}
+
+class photoGallery: NSObject {
+    
+    var  g_id: Int = 0
+    var g_name: String = ""
+    var  g_image:  String = ""
+   
 }

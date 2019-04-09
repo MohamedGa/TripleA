@@ -19,12 +19,12 @@ class personVisual:UIViewController, UITableViewDataSource,UITableViewDelegate,I
     override func viewDidLoad() {
         super.viewDidLoad()
         handleRefresh()
-      
+        tableView.delegate=self
+        tableView.dataSource=self
         refresher = UIRefreshControl()
         refresher.attributedTitle = NSAttributedString(string: "loading")
         refresher.addTarget(self, action: #selector (personVisual.handleRefresh), for: UIControlEvents.valueChanged)
-        tableView.delegate=self
-        tableView.dataSource=self
+        
         tableView.addSubview(refresher)
        
         
@@ -51,13 +51,22 @@ class personVisual:UIViewController, UITableViewDataSource,UITableViewDelegate,I
         return person_list.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "personCell", for: indexPath) as! personCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "personCell") as! personCell
+        
         cell.companyName.text = person_list[indexPath.row].c_name
         let strin = self.person_list[indexPath.row].c_image
         
         cell.companyImage.ImageFromURL(url: "https://tripleaevent.com/storage/app/public/company_images/\(strin)", indicatorColor: .gray, errorImage: UIImage(named: "LOGO")!, imageView: cell.companyImage)
+       
+        let coverPhoto = self.person_list[indexPath.row].c_coverimage
+        
+        cell.coverPhoto.ImageFromURL(url: "https://tripleaevent.com/storage/app/public/company_coverimages/\(coverPhoto)", indicatorColor: .gray, errorImage: UIImage(named: "overlay")!, imageView: cell.coverPhoto)
         
         cell.companyId.text = String(person_list[indexPath.row].c_id)
+        let c_id = Int(person_list[indexPath.row].c_id)
+        let def = UserDefaults.standard
+        def.setValue(c_id, forKey: "c_id")
+        def.synchronize()
         let success = self.person_list[indexPath.row].c_guaranteed
         if success == "1" {
             cell.paidImage.isHidden = false
@@ -66,6 +75,7 @@ class personVisual:UIViewController, UITableViewDataSource,UITableViewDelegate,I
         {
             cell.paidImage.isHidden = true
         }
+        cell.getCompanyServices()
         
         return cell //4.
     }

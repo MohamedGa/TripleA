@@ -21,7 +21,7 @@ class selectCountry: UIViewController,UIPickerViewDataSource, UIPickerViewDelega
    
 
     @IBOutlet weak var selectCountryTF: UITextField!
-    @IBOutlet weak var logoHome: UIBarButtonItem!
+    
     @IBOutlet weak var pickerTextField: UITextField!
     @IBOutlet weak var dd: UIBarButtonItem!
     override func viewDidLoad() {
@@ -34,6 +34,11 @@ class selectCountry: UIViewController,UIPickerViewDataSource, UIPickerViewDelega
             self.revealViewController()?.tapGestureRecognizer()
             
         }
+        
+        let cityID = 1
+        let def = UserDefaults.standard
+        def.setValue(cityID, forKey: "cityID")
+        def.synchronize()
         getCities()
         refresher = UIRefreshControl()
         refresher.attributedTitle = NSAttributedString(string: "loading")
@@ -51,8 +56,10 @@ class selectCountry: UIViewController,UIPickerViewDataSource, UIPickerViewDelega
         
         toolBar.layer.position = CGPoint(x: self.view.frame.size.width/2, y: self.view.frame.size.height-30.0)
         
-        toolBar.barStyle = UIBarStyle.blackOpaque
-        toolBar.backgroundColor = UIColor(red:0.83, green:0.25, blue:0.22, alpha:1.0)
+    //  toolBar.barStyle = UIBarStyle.black
+        toolBar.barTintColor =  UIColor(red:0.83, green:0.25, blue:0.22, alpha:1.0)
+        
+        
         
         toolBar.tintColor = UIColor.white
         
@@ -150,13 +157,7 @@ class selectCountry: UIViewController,UIPickerViewDataSource, UIPickerViewDelega
         
     }
     
-    @IBAction func HomeTapped(_ sender: UIBarButtonItem) {
-        let mainstoryboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let newViewcontroller = mainstoryboard.instantiateViewController(withIdentifier: "mainPage") as! mainPage
-        let newFrontController = UINavigationController.init(rootViewController: newViewcontroller)
-        
-        revealViewController().pushFrontViewController(newFrontController, animated: true)
-    }
+    
     
     /*
     // MARK: - Navigation

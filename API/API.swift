@@ -281,7 +281,7 @@ class API: NSObject {
        
         
        
-        guard let city_id = helper.getcityID() else {
+       guard let city_id = helper.getcityID() else {
             completion ( nil , [] )
             return
         }
@@ -338,6 +338,8 @@ class API: NSObject {
                         
                         company.ms_name = data["ms_name"]?.string ?? ""
                         company.ms_description = data["ms_description"]?.string ?? ""
+                        company.c_address = data["c_address"]?.string ?? ""
+                        company.c_coverimage = data["c_coverimage"]?.string ?? ""
                         company_list.append(company)
                         
                     }
@@ -406,6 +408,8 @@ class API: NSObject {
                         
                         group.ms_name = data["ms_name"]?.string ?? ""
                         group.ms_description = data["ms_description"]?.string ?? ""
+                        group.c_address = data["c_address"]?.string ?? ""
+                        group.c_coverimage = data["c_coverimage"]?.string ?? ""
                         group_list.append(group)
                         
                     }
@@ -474,6 +478,8 @@ class API: NSObject {
                         
                         person.ms_name = data["ms_name"]?.string ?? ""
                         person.ms_description = data["ms_description"]?.string ?? ""
+                         person.c_address = data["c_address"]?.string ?? ""
+                        person.c_coverimage = data["c_coverimage"]?.string ?? ""
                         person_list.append(person)
                         
                     }
@@ -745,6 +751,7 @@ class API: NSObject {
                         company.c_longitude = data["c_longitude"]?.double ?? 0
                         
                         company.c_lattitude = data["c_lattitude"]?.double ?? 0
+                        company.c_address = data["c_address"]?.string ?? ""
                       
                         details_list.append(company)
                         
@@ -797,6 +804,52 @@ class API: NSObject {
                         
                     }
                     completion(nil, cities_list)
+                    
+                }
+        }
+    }
+    class func getAllPhotoGallaries (completion: @escaping (_ error : Error?, _ gallaris_list: [photoGallery])->Void) {
+        
+        
+        
+      
+        let url = "https://tripleaevent.com/api/getAllPhotoGallery"
+        
+         let parameters = [:] as [String : Any]
+        Alamofire.request(url, method: .get, parameters: parameters, encoding: URLEncoding.default, headers: nil)
+            .validate(statusCode: 200..<900)
+            .responseJSON { responce in
+                switch responce.result
+                {
+                case .failure(let error):
+                    
+                    print(error)
+                    
+                case.success(let value):
+                    
+                    print(value)
+                    let json = JSON(value)
+                    guard let dataArr = json["photoGallery"].array else
+                    {
+                        
+                        completion (nil, [] )
+                        return
+                    }
+                    
+                    var gallaris_list = [photoGallery]()
+                    for data in dataArr {
+                        guard let data = data.dictionary else {return}
+                        
+                        let person = photoGallery()
+                        person.g_id = data["g_id"]?.int ?? 0
+                        person.g_name = data["g_name"]?.string ?? ""
+                      
+                        person.g_image = data["g_image"]?.string ?? ""
+                      
+                        gallaris_list.append(person)
+                        
+                    }
+                    completion(nil, gallaris_list)
                     
                 }
         }

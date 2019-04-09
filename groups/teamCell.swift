@@ -16,6 +16,7 @@ class teamCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewDel
     @IBOutlet weak var companyImage: UIImageView!
     @IBOutlet weak var companyID: UILabel!
     @IBOutlet weak var serviceTeamCollectionView: UICollectionView!
+    @IBOutlet weak var coverPhoto: UIImageView!
     var service_list = [companyServices]()
     var refresher : UIRefreshControl!
     override func awakeFromNib() {
@@ -24,7 +25,7 @@ class teamCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewDel
         companyImage.layer.borderWidth = 2
         companyImage.layer.borderColor = UIColor.red.cgColor
         companyID.isHidden = true
-        getCompanyServices()
+       
         serviceTeamCollectionView.delegate = self
         serviceTeamCollectionView.dataSource = self
         refresher = UIRefreshControl()
@@ -32,8 +33,16 @@ class teamCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewDel
         refresher.addTarget(self, action: #selector (teamCell.getCompanyServices), for: UIControlEvents.valueChanged)
         
         serviceTeamCollectionView.addSubview(refresher)
+       
     }
-    @objc private func getCompanyServices() {
+   
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
+    }
+   func getCompanyServices() {
         
         let def = UserDefaults.standard
         let c_id = def.object(forKey: "c_id")
@@ -48,12 +57,6 @@ class teamCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewDel
                 self.serviceTeamCollectionView.reloadData()
             }
         }
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // Set the number of items in your collection view.

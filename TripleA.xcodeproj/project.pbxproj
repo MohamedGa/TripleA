@@ -91,7 +91,7 @@
 		9641C65D221EF1B7007D9CB0 /* serviceCompanyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = serviceCompanyCell.swift; sourceTree = "<group>"; };
 		9641C65F221EF51E007D9CB0 /* serviceTeamCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = serviceTeamCell.swift; sourceTree = "<group>"; };
 		966395CB221072F400A57106 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
-		966395CD2210735C00A57106 /* modelsTripleA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = modelsTripleA.swift; sourceTree = "<group>"; };
+		966395CD2210735C00A57106 /* modelsTripleA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = modelsTripleA.swift; path = ../../TripleA/Helper/modelsTripleA.swift; sourceTree = "<group>"; };
 		966395D022108BF300A57106 /* JF-Flat-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JF-Flat-regular.ttf"; sourceTree = "<group>"; };
 		967042B822035FEB0029B132 /* JSON+Extention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "JSON+Extention.swift"; sourceTree = "<group>"; };
 		967042B922035FEB0029B132 /* AlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
@@ -207,8 +207,7 @@
 				96A4AF10220AFC0200806DF9 /* helper.swift */,
 				966395CD2210735C00A57106 /* modelsTripleA.swift */,
 			);
-			name = Helper;
-			path = "../Service Valley/Helper";
+			path = Helper;
 			sourceTree = "<group>";
 		};
 		967042B722035FEB0029B132 /* Vendor */ = {
@@ -220,8 +219,7 @@
 				967042BB22035FEB0029B132 /* Extensions.swift */,
 				967042BC22035FEB0029B132 /* File.swift */,
 			);
-			name = Vendor;
-			path = "../Service Valley/Vendor";
+			path = Vendor;
 			sourceTree = "<group>";
 		};
 		96922C5E2207012200E76A16 /* mainPage */ = {

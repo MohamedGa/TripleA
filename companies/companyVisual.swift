@@ -23,7 +23,7 @@ class companyVisual: UIViewController, UITableViewDataSource,UITableViewDelegate
         refresher = UIRefreshControl()
         refresher.attributedTitle = NSAttributedString(string: "loading")
         refresher.addTarget(self, action: #selector (companyVisual.handleRefresh), for: UIControlEvents.valueChanged)
-tableView.delegate=self
+       tableView.delegate=self
         tableView.dataSource=self
         tableView.addSubview(refresher)
         
@@ -48,13 +48,22 @@ tableView.delegate=self
         return company_list.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "companyVisualCell", for: indexPath) as! companyVisualCell
+        let cell =    tableView.dequeueReusableCell(withIdentifier: "companyVisualCell") as! companyVisualCell
+        
         cell.companyName.text = company_list[indexPath.row].c_name
         let strin = self.company_list[indexPath.row].c_image
         
         cell.companyImage.ImageFromURL(url: "https://tripleaevent.com/storage/app/public/company_images/\(strin)", indicatorColor: .gray, errorImage: UIImage(named: "LOGO")!, imageView: cell.companyImage)
+     
+        let coverPhoto = self.company_list[indexPath.row].c_coverimage
+        
+        cell.coverPhoto.ImageFromURL(url: "https://tripleaevent.com/storage/app/public/company_coverimages/\(coverPhoto)", indicatorColor: .gray, errorImage: UIImage(named: "overlay")!, imageView: cell.coverPhoto)
     
         cell.companyID.text = String(company_list[indexPath.row].c_id)
+        let c_id = Int(company_list[indexPath.row].c_id)
+        let def = UserDefaults.standard
+        def.setValue(c_id, forKey: "c_id")
+        def.synchronize()
         let success = self.company_list[indexPath.row].c_guaranteed
         if success == "1" {
             cell.paidImage.isHidden = false
@@ -63,7 +72,7 @@ tableView.delegate=self
         {
             cell.paidImage.isHidden = true
         }
-        
+         cell.getCompanyServices()
         return cell //4.
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

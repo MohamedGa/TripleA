@@ -17,6 +17,7 @@ class companyVisualCell: UITableViewCell, UICollectionViewDataSource, UICollecti
     @IBOutlet weak var bigImage: UIImageView!
     @IBOutlet weak var companyImage: UIImageView!
     @IBOutlet weak var companyID: UILabel!
+    @IBOutlet weak var coverPhoto: UIImageView!
     @IBOutlet weak var serviceCompanyCollectionView: UICollectionView!
     var service_list = [companyServices]()
     var refresher : UIRefreshControl!
@@ -27,7 +28,7 @@ class companyVisualCell: UITableViewCell, UICollectionViewDataSource, UICollecti
         companyImage.layer.borderWidth = 2
         companyImage.layer.borderColor = UIColor.red.cgColor
          companyID.isHidden = true
-        getCompanyServices()
+       
         serviceCompanyCollectionView.delegate = self
         serviceCompanyCollectionView.dataSource = self
         refresher = UIRefreshControl()
@@ -35,8 +36,16 @@ class companyVisualCell: UITableViewCell, UICollectionViewDataSource, UICollecti
         refresher.addTarget(self, action: #selector (companyVisualCell.getCompanyServices), for: UIControlEvents.valueChanged)
         
         serviceCompanyCollectionView.addSubview(refresher)
+     
     }
-    @objc private func getCompanyServices() {
+    
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
+    }
+    func getCompanyServices() {
         
         let def = UserDefaults.standard
         let c_id = def.object(forKey: "c_id")
@@ -51,12 +60,6 @@ class companyVisualCell: UITableViewCell, UICollectionViewDataSource, UICollecti
                 self.serviceCompanyCollectionView.reloadData()
             }
         }
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // Set the number of items in your collection view.

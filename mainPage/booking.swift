@@ -43,7 +43,7 @@ class booking: UIViewController, UICollectionViewDataSource, UICollectionViewDel
     
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: "خدمة الحجوزات",image: UIImage(named: "booking"))
+        return IndicatorInfo(title: "الــحــجـــــــــوزات",image: UIImage(named: "booking"))
     }
     
 

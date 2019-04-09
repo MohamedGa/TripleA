@@ -17,7 +17,10 @@ class visualServices: UIViewController, UICollectionViewDataSource, UICollection
      var refresher : UIRefreshControl!
     var location_list = [subServices]()
     let ms_id = 1
-    
+    override func viewWillAppear(_ animated: Bool) {
+        handleRefresh()
+        
+    }
     
     
     override func viewDidLoad() {

@@ -31,6 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSPlacesClient.provideAPIKey("AIzaSyAly1lzRrY2jlqzuGk8Erzl_VvRf0B0Uvs")
         // Override point for customization after application launch.
         Localizer.DoTheExchange()
+        Thread.sleep(forTimeInterval: 3)
         return true
     }
 

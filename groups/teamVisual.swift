@@ -46,13 +46,23 @@ class teamVisual: UIViewController, UITableViewDataSource,UITableViewDelegate,In
         return group_list.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "teamCell", for: indexPath) as! teamCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "teamCell") as! teamCell
+        
         cell.companyName.text = group_list[indexPath.row].c_name
         let strin = self.group_list[indexPath.row].c_image
         
         cell.companyImage.ImageFromURL(url: "https://tripleaevent.com/storage/app/public/company_images/\(strin)", indicatorColor: .gray, errorImage: UIImage(named: "LOGO")!, imageView: cell.companyImage)
+      
+        let coverPhoto = self.group_list[indexPath.row].c_coverimage
         
+        cell.coverPhoto.ImageFromURL(url: "https://tripleaevent.com/storage/app/public/company_coverimages/\(coverPhoto)", indicatorColor: .gray, errorImage: UIImage(named: "overlay")!, imageView: cell.coverPhoto)
+        
+       
        cell.companyID.text = String(group_list[indexPath.row].c_id)
+        let c_id = Int(group_list[indexPath.row].c_id)
+        let def = UserDefaults.standard
+        def.setValue(c_id, forKey: "c_id")
+        def.synchronize()
         let success = self.group_list[indexPath.row].c_guaranteed
         if success == "1" {
             cell.paidImage.isHidden = false
@@ -62,7 +72,7 @@ class teamVisual: UIViewController, UITableViewDataSource,UITableViewDelegate,In
            cell.paidImage.isHidden = true
         }
         
-        
+        cell.getCompanyServices()
         return cell //4.
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

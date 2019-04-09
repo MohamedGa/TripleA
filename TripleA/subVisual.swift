@@ -14,6 +14,7 @@ class subVisual: ButtonBarPagerTabStripViewController {
     @IBOutlet weak var upImage: UIImageView!
     @IBOutlet weak var upLabel: UILabel!
     @IBOutlet weak var dd: UIBarButtonItem!
+    @IBOutlet weak var backBtn: UIBarButtonItem!
     override func viewDidLoad() {
         if revealViewController() != nil {
             dd.target = revealViewController()
@@ -22,7 +23,7 @@ class subVisual: ButtonBarPagerTabStripViewController {
             self.revealViewController().panGestureRecognizer()
           //  self.revealViewController()?.tapGestureRecognizer()
         }
-        DispatchQueue.main.async { self.moveToViewController(at: 2, animated: true) }
+       
         let textAttributes = [NSForegroundColorAttributeName: UIColor.red , NSFontAttributeName: UIFont(name: "JFFlat-Regular", size: 19)!]
         navigationController?.navigationBar.titleTextAttributes = textAttributes
         // change selected bar color
@@ -50,7 +51,7 @@ class subVisual: ButtonBarPagerTabStripViewController {
             newCell?.backgroundColor = UIColor(red:0.90, green:0.18, blue:0.18, alpha:1.0)
         }
         super.viewDidLoad()
- 
+  DispatchQueue.main.async { self.moveToViewController(at: 2, animated: true) }
         guard let ms_id = helper.getMS_ID() else {
                     return
                 }
@@ -78,6 +79,7 @@ class subVisual: ButtonBarPagerTabStripViewController {
             upImage.image = yourImage
             self.upLabel.text = "خدمة الحجوزات"
         }
+        backBtn.setTitleTextAttributes(textAttributes, for: .normal)
         
         // Do any additional setup after loading the view.
     }
@@ -90,11 +92,7 @@ class subVisual: ButtonBarPagerTabStripViewController {
     }
    
     @IBAction func HomeTapped(_ sender: UIBarButtonItem) {
-        let mainstoryboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let newViewcontroller = mainstoryboard.instantiateViewController(withIdentifier: "mainPage") as! mainPage
-        let newFrontController = UINavigationController.init(rootViewController: newViewcontroller)
-        
-        revealViewController().pushFrontViewController(newFrontController, animated: true)
+       self.navigationController?.popViewController(animated: true)
     }
     
 }

@@ -38,6 +38,7 @@ class CompanyDetails: UIViewController, UICollectionViewDataSource, UICollection
     @IBOutlet weak var clientsCollectionView: UICollectionView!
     @IBOutlet weak var upView: UIView!
     
+    @IBOutlet weak var backBTn: UIBarButtonItem!
     @IBOutlet weak var serviceCollectionView: UICollectionView!
     @IBOutlet weak var dd: UIBarButtonItem!
     @IBOutlet weak var slideshow: ImageSlideshow!
@@ -57,16 +58,16 @@ class CompanyDetails: UIViewController, UICollectionViewDataSource, UICollection
             
         }
        
-      UIColor (red:0.90, green:0.18, blue:0.18, alpha:1.0)
+   
         
         let textAttributes = [NSForegroundColorAttributeName: UIColor.red , NSFontAttributeName: UIFont(name: "JFFlat-Regular", size: 19)!]
         navigationController?.navigationBar.titleTextAttributes = textAttributes
         // change selected bar color
         companyPicture.layer.masksToBounds = true
         companyPicture.layer.borderWidth = 5
-        let yourColor : UIColor = UIColor (red:0.90, green:0.18, blue:0.18, alpha:1.0)
+      //  let yourColor : UIColor = UIColor (red:0.90, green:0.18, blue:0.18, alpha:1.0)
         
-        companyPicture.layer.borderColor =  yourColor.cgColor
+        companyPicture.layer.borderColor =  UIColor.white.cgColor
        
         refresher = UIRefreshControl()
         clientsCollectionView.delegate = self
@@ -118,6 +119,7 @@ class CompanyDetails: UIViewController, UICollectionViewDataSource, UICollection
         // outletes
      
         // Do any additional setup after loading the view.
+        backBTn.setTitleTextAttributes(textAttributes, for: .normal)
     }
     @objc func didTap() {
         let fullScreenController = slideshow.presentFullScreenController(from: self)
@@ -126,11 +128,7 @@ class CompanyDetails: UIViewController, UICollectionViewDataSource, UICollection
     }
    
     @IBAction func HomeTapped(_ sender: UIBarButtonItem) {
-        let mainstoryboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let newViewcontroller = mainstoryboard.instantiateViewController(withIdentifier: "mainPage") as! mainPage
-        let newFrontController = UINavigationController.init(rootViewController: newViewcontroller)
-        
-        revealViewController().pushFrontViewController(newFrontController, animated: true)
+       self.navigationController?.popViewController(animated: true)
     }
     
     
@@ -183,7 +181,7 @@ class CompanyDetails: UIViewController, UICollectionViewDataSource, UICollection
                 def.synchronize()
                 
                 self.companyPicture.ImageFromURL(url: "https://tripleaevent.com/storage/app/public/company_images/\(strin)", indicatorColor: .gray, errorImage: UIImage(named: "LOGO")!, imageView: self.companyPicture)
-                self.addressLabel.text = self.details_list.first!.c_location
+                self.addressLabel.text = self.details_list.first!.c_address
                 let camera: GMSCameraPosition = GMSCameraPosition.camera(withLatitude: c_longitude, longitude: c_lattitude, zoom: 17.0)
                 
                 self.viewMap.camera = camera
